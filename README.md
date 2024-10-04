@@ -1,1 +1,5 @@
-# celeb_death_pool
+# Celebrity Death Pool
+
+## Setup
+NPM
+MongoDB
