@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Celebrity Death Pool</title>
+    <title>Celebrity Death Pool 2025</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
@@ -22,8 +22,12 @@
         <hr class="section-divider">
         <div id="nameInput" style="display: none;">
             <h2>Welcome, <span id="userDisplay"></span>!</h2>
-            <input type="text" id="newName" placeholder="Enter a celebrity name">
-            <button onclick="addName()">Add Name</button>
+            <div style="display: flex; align-items: center;">
+                <input type="text" id="newName" placeholder="Enter a celebrity name">
+                <button onclick="addName()">Add Name</button>
+                <button onclick="searchAge()" class="button-spacing">Search Age</button>
+            </div>
+            <div id="ageDisplay" style="margin-top: 10px; font-weight: bold;"></div>
         </div>
         <div id="nameList"></div>
         <div id="allUsers">
@@ -34,7 +38,8 @@
             <h2>Rules</h2>
             <ul>
                 <li>Payout: $20 payed to winner by each player for each death between now and end of 2025.</li>
-                <li>Snake draft format, pick a person 30-39, 40-49, 50-59, 60-69.  Order reverses each round.</li>
+                <li>Snake draft format, pick a person between ages 20-39, 40-49, 50-59, 60-69.  
+                <li>Order reverses each round.</li>
                 <li>Pick can not have a terminal condition.</li>
                 <li>Pick can not have cancer.</li>
                 <li>Picks can not be modified after the draft.</li>
@@ -43,13 +48,13 @@
             </ul>
         </section>
         
-        <!-- New Notes section -->
         <section id="notes">
             <h2>Notes</h2>
             <ul>
                 <li>I didn't spend a lot of time creating this thing, so:</li>
-		<li>Not optimized for mobile, probably looks like shit on your phone.</li>
+                <li>Not optimized for mobile, probably looks like shit on your phone.</li>
                 <li>To re-login use the exact same username you signed up with.</li>
+                <li>If you accidently create a new account, there is a delete button at the bottom of the page.</li>
                 <li>Hit refresh after picks to return to the main page.</li>
             </ul>
         </section>

@@ -37,19 +37,17 @@ body {
     margin-bottom: 20px;
 }
 
-/* Add these new styles */
 .logo-title {
     display: flex;
     align-items: center;
 }
 
 .logo {
-    width: 50px; /* Adjust this value to resize the image */
+    width: 50px;
     height: auto;
-    margin-left: 15px; /* Changed from margin-right to margin-left */
+    margin-left: 15px;
 }
 
-/* Update the existing h1 styles if needed */
 .logo-title h1 {
     margin: 0;
 }
@@ -133,7 +131,6 @@ button:hover {
     margin-top: 30px;
 }
 
-/* Update the existing #userList styles */
 #userList {
     display: flex;
     flex-wrap: wrap;
@@ -148,8 +145,8 @@ button:hover {
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
-    width: 200px; /* Set a fixed width for consistent sizing */
-    text-align: center; /* Center the text within each user card */
+    width: 200px;
+    text-align: center;
 }
 
 #userList > div:hover {
@@ -173,7 +170,6 @@ button:hover {
     font-size: 0.9em;
 }
 
-/* Add styles for the allUsers container if needed */
 #allUsers {
     text-align: center;
 }
@@ -220,7 +216,6 @@ li {
     background-color: #c0392b;
 }
 
-/* Add these new styles */
 .login-container {
     display: flex;
     gap: 10px;
@@ -235,7 +230,6 @@ li {
     white-space: nowrap;
 }
 
-/* Update these existing styles */
 input[type="text"], button {
     padding: 10px;
     border: 1px solid #ddd;
@@ -250,9 +244,6 @@ button {
     transition: background-color 0.3s ease;
 }
 
-/* Rest of your existing CSS styles... */
-
-/* Add these new styles */
 #deleteAccountContainer {
     margin-top: 40px;
     text-align: center;
@@ -275,9 +266,7 @@ button {
     background-color: #c0392b;
 }
 
-/* Rest of your existing CSS styles... */
-
-/* Update the Rules section styles */
+/* Rules section styles */
 #rules {
     margin-top: 40px;
     padding: 20px;
@@ -301,11 +290,11 @@ button {
     margin-bottom: 10px;
 }
 
-/* New Notes section styles */
+/* Notes section styles */
 #notes {
     margin-top: 40px;
     padding: 20px;
-    background-color: #f0f8ff; /* Light blue background to differentiate from Rules */
+    background-color: #f0f8ff;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     border: 1px solid #b0d4ff;
@@ -317,7 +306,7 @@ button {
 }
 
 #notes ul {
-    list-style-type: square; /* Different list style for Notes */
+    list-style-type: square;
     padding-left: 20px;
 }
 
@@ -325,5 +314,6 @@ button {
     margin-bottom: 10px;
 }
 
-/* Rest of your existing CSS styles... */
-
+.button-spacing {
+    margin-left: 10px;
+}

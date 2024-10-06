@@ -130,6 +130,70 @@ async function confirmDeleteAccount() {
     document.getElementById('deleteAccountContainer').style.display = 'none';
 }
 
+async function searchAge() {
+    const name = document.getElementById('newName').value;
+    const ageDisplay = document.getElementById('ageDisplay');
+    ageDisplay.textContent = '';
+
+    if (!name) {
+        ageDisplay.textContent = "Please enter a celebrity name.";
+        return;
+    }
+
+    // Wikipedia API URL
+    const apiUrl = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(name)}&format=json&origin=*`;
+
+    try {
+        const response = await axios.get(apiUrl);
+        const pageId = response.data.query.search[0]?.pageid;
+
+        if (pageId) {
+            const pageDetailsUrl = `https://en.wikipedia.org/w/api.php?action=parse&pageid=${pageId}&prop=text&format=json&origin=*`;
+            const detailsResponse = await axios.get(pageDetailsUrl);
+            const htmlContent = detailsResponse.data.parse.text['*'];
+
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = htmlContent;
+
+            const infobox = tempDiv.querySelector('.infobox');
+            let exactAge = 'Age not found';
+
+            if (infobox) {
+                const rows = infobox.querySelectorAll('tr');
+                rows.forEach(row => {
+                    const header = row.querySelector('th');
+                    const data = row.querySelector('td');
+                    if (header && data) {
+                        // Check for various formats of birth date
+                        if (header.textContent.includes('Born')) {
+                            const birthDate = data.textContent.match(/(\d{1,2} \w+ \d{4})|(\d{4}-\d{2}-\d{2})/);
+                            if (birthDate) {
+                                const birthDateObj = new Date(birthDate[0]);
+                                const today = new Date();
+                                let age = today.getFullYear() - birthDateObj.getFullYear();
+                                
+                                // Adjust age if the birthday hasn't occurred yet this year
+                                if (today.getMonth() < birthDateObj.getMonth() || 
+                                    (today.getMonth() === birthDateObj.getMonth() && today.getDate() < birthDateObj.getDate())) {
+                                    age--;
+                                }
+
+                                exactAge = age;
+                            }
+                        }
+                    }
+                });
+            }
+
+            ageDisplay.textContent = `${name} is ${exactAge} years old.`;
+        } else {
+            ageDisplay.textContent = "No results found for the given name.";
+        }
+    } catch (error) {
+        console.error("Error fetching age:", error);
+        ageDisplay.textContent = "Could not find age information. Please try again.";
+    }
+}
+
 // Call fetchAllUsers when the page loads
 fetchAllUsers();
-

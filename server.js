@@ -6,14 +6,13 @@ const path = require('path');
 const fs = require('fs');
 
 const app = express();
-const port = process.env.PORT || 80; // for HTTP
-// or
-// const port = process.env.PORT || 8443; // for HTTPS
+const port = process.env.PORT || 80; // temporary set until SSL certs
+// const port = process.env.PORT || 8443; 
 
 // MongoDB Atlas connection string from environment variable
 const mongoURI = process.env.MONGODB_URI;
 
-// Connect to MongoDB Atlas
+
 mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('Connected to MongoDB Atlas'))
     .catch(err => console.error('Error connecting to MongoDB Atlas:', err));
@@ -37,17 +36,6 @@ const publicPath = path.join(__dirname, 'public');
 console.log('Public directory path:', publicPath);
 app.use(express.static(publicPath));
 
-// Add a route to check if index.html exists
-app.get('/check', (req, res) => {
-    const indexPath = path.join(publicPath, 'index.html');
-    fs.access(indexPath, fs.constants.F_OK, (err) => {
-        if (err) {
-            res.status(404).send(`index.html not found. Looked in: ${indexPath}`);
-        } else {
-            res.send(`index.html found at: ${indexPath}`);
-        }
-    });
-});
 
 // API routes
 app.post('/api/users', async (req, res) => {
