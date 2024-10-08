@@ -4,14 +4,14 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const path = require('path');
 const fs = require('fs');
+const https = require('https');
+const http = require('http');
 
 const app = express();
-const port = process.env.PORT || 80; // temporary set until SSL certs
-// const port = process.env.PORT || 8443; 
+const port = process.env.PORT || 8443;
 
 // MongoDB Atlas connection string from environment variable
 const mongoURI = process.env.MONGODB_URI;
-
 
 mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('Connected to MongoDB Atlas'))
@@ -62,7 +62,7 @@ app.post('/api/names', async (req, res) => {
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
-        
+
         if (action === 'add') {
             if (user.names.length >= 5) {
                 return res.status(400).json({ message: 'Maximum number of names reached' });
@@ -74,7 +74,7 @@ app.post('/api/names', async (req, res) => {
                 user.names.splice(index, 1);
             }
         }
-        
+
         await user.save();
         res.json(user);
     } catch (error) {
@@ -129,6 +129,21 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
+// Load SSL certificate and key
+const options = {
+    key: fs.readFileSync('ssl/server.key'),
+    cert: fs.readFileSync('ssl/server.cert')
+};
+
+// Create HTTPS server
+const httpsPort = 443;
+https.createServer(options, app).listen(httpsPort, () => {
+    console.log(`Server is running on https://localhost:${httpsPort}`);
+});
+
+http.createServer((req, res) => {
+    res.writeHead(301, { "Location": `https://${req.headers.host}${req.url}` });
+    res.end();
+}).listen(80, () => {
+    console.log('HTTP server running on port 80, redirecting to HTTPS');
 });

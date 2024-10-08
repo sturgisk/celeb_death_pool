@@ -171,9 +171,9 @@ async function searchAge() {
                                 const birthDateObj = new Date(birthDate[0]);
                                 const today = new Date();
                                 let age = today.getFullYear() - birthDateObj.getFullYear();
-                                
+
                                 // Adjust age if the birthday hasn't occurred yet this year
-                                if (today.getMonth() < birthDateObj.getMonth() || 
+                                if (today.getMonth() < birthDateObj.getMonth() ||
                                     (today.getMonth() === birthDateObj.getMonth() && today.getDate() < birthDateObj.getDate())) {
                                     age--;
                                 }
