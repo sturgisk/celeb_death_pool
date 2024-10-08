@@ -1,7 +1,7 @@
 # Celebrity Death Pool
 
 ## Description
-Was made over a weekend for a group of friends, just a side project to mess around with.  No real sigup process or passwords required, just username creation.  Not optimuzed for mobile and could be improved all around.
+Was made over a weekend for a group of friends, just a side project to mess around with.  No real sigup process or passwords required, just username creation.  Not optimized for mobile and could be improved all around.
 
 ## Setup
 * My Config:  Ubuntu Droplet via Digital Ocean using MongoDB Atlas (Free tier)
